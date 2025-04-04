@@ -1,0 +1,52 @@
+**TO-DO LIST**
+===========
+
+- [ ] STEP 1 - Choisir le modèle
+    - [ ] Lister les projets OC avec Modèle, Tâche, Dataset, Métrique (ex.: BERT, Classification, sentiment_dataset, accuracy 80%)
+    - [ ] Recherche S.O.T.A. sur Papers with Code pour chaque projet
+    - [ ] Examiner la presse sur les liens OC (Groupe d'onglet CHROME)
+    - [ ] Choisir la baseline et le S.O.T.A. à évaluer pour le POC
+    - Liste de ressources:
+        - [ ] https://www.paperswithcode.com/
+        - [ ] https://arxiv.org/
+        - [ ] https://www.kdnuggets.com/
+        - [ ] https://towardsdatascience.com/
+        - [ ] https://www.analyticsvidhya.com/
+        - [ ] https://www.datacamp.com/community/blog
+        - [ ] https://www.deeplearning.ai/
+        - [ ] https://www.fast.ai/
+        - [ ] https://www.oreilly.com/library/view/handson-machine-learning/9781492032632/
+- [ ] STEP 2 - Créer le plan prévisionnel de travail
+    - [ ] Examiner le docx avec le template (GOOGLE DRIVE: https://drive.google.com/open?id=1D7ylk9OEviOve21B7aq3M8GF5qQBgKBe&usp=drive_fs)
+    - [ ] Examiner si doc OPENCLASSROOMS a une ressource liée
+    - Liste de ressources:
+        - [ ] A définir
+- [ ] STEP 3 - Remplir le notebook pour comparer les modèles
+    - [ ] Sous-Steps à définir plus tard
+    - Liste de ressources:
+        - [ ] A définir
+- [ ] STEP 4 - Créer le dashboard
+    - [ ] Lire les spécificités du dashboard (GOOGLE DRIVE: https://drive.google.com/open?id=1D7ylk9OEviOve21B7aq3M8GF5qQBgKBe&usp=drive_fs)
+    - [ ] Choix de l'application en fonction du résultat attendu
+    - [ ] Sous-Steps à définir plus tard
+    - Liste de ressources:
+        - [ ] A définir
+- [ ] STEP 5 - CI-CD
+    - [ ] Container Docker + GHA FRONTEND
+    - [ ] Container Docker + GHA BACKEND
+    - Liste de ressources:
+        - [ ] A définir
+- [ ] STEP 6 - Créer la note technique
+    - [ ] Examiner le template de la note (GOOGLE DRIVE: https://drive.google.com/open?id=1D7ylk9OEviOve21B7aq3M8GF5qQBgKBe&usp=drive_fs)
+    - [ ] Sous-Steps à définir plus tard
+    - Liste de ressources:
+        - [ ] A définir
+- [ ] STEP 7 - Préparer les livrables
+    - [ ] Plan de travail prévisionnel en PDF
+    - [ ] Notebook Jupyter avec le code et les résultats
+    - [ ] Note technique en PDF
+    - [ ] Code source du dashboard
+    - [ ] Présentation en PDF
+        - [ ] 15 minutes powerpoint
+        - [ ] 5 minutes démo frontend
+    - [ ] Tester la démo cloud du dashboard
