@@ -1,21 +1,20 @@
 **TO-DO LIST**
 ===========
 
-- [ ] STEP 1 - Choisir le modèle
-    - [ ] Lister les projets OC avec Modèle, Tâche, Dataset, Métrique (ex.: BERT, Classification, sentiment_dataset, accuracy 80%)
-    - [ ] Recherche S.O.T.A. sur Papers with Code pour chaque projet
-    - [ ] Examiner la presse sur les liens OC (Groupe d'onglet CHROME)
-    - [ ] Choisir la baseline et le S.O.T.A. à évaluer pour le POC
-    - Liste de ressources:
-        - [ ] https://www.paperswithcode.com/
-        - [ ] https://arxiv.org/
-        - [ ] https://www.kdnuggets.com/
-        - [ ] https://towardsdatascience.com/
-        - [ ] https://www.analyticsvidhya.com/
-        - [ ] https://www.datacamp.com/community/blog
-        - [ ] https://www.deeplearning.ai/
-        - [ ] https://www.fast.ai/
-        - [ ] https://www.oreilly.com/library/view/handson-machine-learning/9781492032632/
+- [X] STEP 1 - Choisir le modèle
+    - [X] Lister les projets OC avec Modèle, Tâche, Dataset, Métrique (ex.: BERT, Classification, sentiment_dataset, accuracy 80%)
+    - [X] Recherche S.O.T.A. sur Papers with Code pour chaque projet
+    - Parmi les favoris (MAMBAVISION), récupérer les ressources :
+        - ~~[ ] Examiner la presse sur les liens OC (Groupe d'onglet CHROME)~~
+        - Autres ressources:
+        - [X] https://www.paperswithcode.com/
+        - [X] https://arxiv.org/
+        - ~~[ ] https://www.kdnuggets.com/~~
+        - [X] https://towardsdatascience.com/
+        - [X] https://www.analyticsvidhya.com/
+        - [X] https://www.datacamp.com/community/blog
+        - [X] https://www.deeplearning.ai/
+    - [X] Choisir la baseline et le S.O.T.A. à évaluer pour le POC : Hybrid Mamba-Transformer NVIDIA MambaVision
 - [ ] STEP 2 - Créer le plan prévisionnel de travail
     - [ ] Examiner le docx avec le template (GOOGLE DRIVE: https://drive.google.com/open?id=1D7ylk9OEviOve21B7aq3M8GF5qQBgKBe&usp=drive_fs)
     - [ ] Examiner si doc OPENCLASSROOMS a une ressource liée
