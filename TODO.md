@@ -6,7 +6,6 @@
     - [X] Recherche S.O.T.A. sur Papers with Code pour chaque projet
     - Parmi les favoris (MAMBAVISION), récupérer les ressources :
         - ~~[ ] Examiner la presse sur les liens OC (Groupe d'onglet CHROME)~~
-        - Autres ressources:
         - [X] https://www.paperswithcode.com/
         - [X] https://arxiv.org/
         - ~~[ ] https://www.kdnuggets.com/~~
@@ -16,10 +15,13 @@
         - [X] https://www.deeplearning.ai/
     - [X] Choisir la baseline et le S.O.T.A. à évaluer pour le POC : Hybrid Mamba-Transformer NVIDIA MambaVision
 - [ ] STEP 2 - Créer le plan prévisionnel de travail
-    - [ ] Examiner le docx avec le template (GOOGLE DRIVE: https://drive.google.com/open?id=1D7ylk9OEviOve21B7aq3M8GF5qQBgKBe&usp=drive_fs)
-    - [ ] Examiner si doc OPENCLASSROOMS a une ressource liée
+    - [X] Examiner le docx avec le template (GOOGLE DRIVE: https://drive.google.com/open?id=1D7ylk9OEviOve21B7aq3M8GF5qQBgKBe&usp=drive_fs)
+    - [X] Examiner si doc OPENCLASSROOMS a une ressource liée
+    - [ ] Regarder les ressources (news report, yt, etc.)
+    - [ ] Créer le plan de travail prévisionnel - prototype (main papers from authors (2 mamba vision)& 1 paper introducing mamba)
+    - [ ] Créer le plan de travail prévisionnel - production
     - Liste de ressources:
-        - [ ] A définir
+        - [X] Lire les ressources sur le groupe chrome ManbaVision
 - [ ] STEP 3 - Remplir le notebook pour comparer les modèles
     - [ ] Sous-Steps à définir plus tard
     - Liste de ressources:
@@ -29,7 +31,11 @@
     - [ ] Choix de l'application en fonction du résultat attendu
     - [ ] Sous-Steps à définir plus tard
     - Liste de ressources:
-        - [ ] A définir
+        - [ ] [Cours OC concevez un contenu web accessible](https://openclassrooms.com/fr/courses/6691346-concevez-un-contenu-web-accessible/6940707-tirez-le-maximum-de-ce-cours-14)
+        - [ ] [W3C - WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/glance/fr)
+        - [ ] [Cours OC Tableau](https://openclassrooms.com/fr/courses/8200086-realisez-un-dashboard-avec-tableau?archived-source=4525361)
+        - [ ] [Cours OC Power BI](https://openclassrooms.com/fr/courses/6204541-realisez-des-rapports-danalyse-de-donnees-avec-power-bi?archived-source=4525361)
+        - [ ] [Doc Dash](https://dash.plotly.com/installation)
 - [ ] STEP 5 - CI-CD
     - [ ] Container Docker + GHA FRONTEND
     - [ ] Container Docker + GHA BACKEND
