@@ -23,7 +23,7 @@
     - Liste de ressources:
         - [X] Lire les ressources sur le groupe chrome ManbaVision
 - [ ] STEP 3 - Remplir le notebook pour comparer les modèles
-    - [ ] Sous-Steps à définir plus tard
+    - [ ] Identifier comment charger avec Pytorch ou Huggingface un dataset pour le train-val (demander à gpt ce qui est le mieux)
     - Liste de ressources:
         - [ ] A définir
 - [ ] STEP 4 - Créer le dashboard
