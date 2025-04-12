@@ -36,7 +36,8 @@ Architecture de réseau de neurones qui utilise des mécanismes d'attention pour
 
 # Ressources
 =================
-## 1. NVIDIA Research - MambaVision: A Hybrid Mamba Transformer Vision Backbone (introduction to the paper)
+## 1. Papers & Publications
+### 1.1. NVIDIA Research - MambaVision: A Hybrid Mamba Transformer Vision Backbone
 URL : https://research.nvidia.com/publication/2025-06_mambavision-hybrid-mamba-transformer-vision-backbone
 
 ![architecture](ressources/ManbaVisionArchitecture.png)
@@ -56,3 +57,21 @@ Contexte des princpipaux de papiers qui ont précédé :
 - ![Convolution S.S.M.](https://research.nvidia.com/publication/2023-12_convolutional-state-space-models-long-range-spatiotemporal-modeling)
 - ![Mamba-based Language Models](https://research.nvidia.com/publication/2024-06_empirical-study-mamba-based-language-models)
 - ![Gated delta Networks with Mamba](https://research.nvidia.com/publication/2025-04_gated-delta-networks-improving-mamba2-delta-rule)
+
+
+## 2. Courses & Tutorials
+### 2.1. Analytics Vidhya - Building LLM with Mamba & SSM
+URL : https://www.analyticsvidhya.com/blog/2024/01/mamba-a-selective-state-space-model-for-vision-transformers/
+
+Attention, ce cours se concentre sur les LLM mais il est une bonne introduction à l'architecture Mamba et à son fonctionnement. Il aborde les concepts de base des Mamba et des SSM, ainsi que leur application dans le contexte des LLM.
+
+
+Synthèse Introduction:
+- Désavantage de l'architecture Transformers : la complexité quadratique de l'attention. A chaque étape de l'attention, le modèle doit calculer les relations entre le nouveau token généré et tous les tokens précédents, ce qui peut devenir coûteux en termes de calcul et de mémoire. La complexité quadratique de l'attention rend difficile le traitement de longues séquences de données.
+- La structure linéaire du RNN : Les RNN traitent les données séquentiellement, en mettant à jour l'état caché à chaque étape de la séquence et génèrent un nouvel état caché en fonction de l'état précédent et du nouvel élément d'entrée. Cela permet aux RNN de capturer les relations à long terme dans les données séquentielles. Le désavantage est que l'information est compréhensée dans l'hidden state au fur est à mesure que la séquence avance, ce qui peut entraîner une perte d'information et de précision à terme.
+
+Synthse State Space Model:
+- Un State Space est un modèle mathématique qui décrit la dynamique d'un système en termes d'états internes et d'entrées/sorties. Un State Vector est un vecteur qui représente l'état interne du système à un moment donné qui comprends les coordonnées X,Y de l'objet dans l'espace et aussi la distance nécessaire juqu'à la sortie.
+
+- Reprendre l'idée de l'architecture RNN (Recurrent Neural Network) qui traite les données séquentiellement, en se concentrant sur les relations locales entre les pixels plutôt que sur l'ensemble de l'image.
+- L'architecture Mamba utilise des blocs de convolution pour extraire des caractéristiques locales, suivis d'une attention globale pour capturer les relations à long terme.
