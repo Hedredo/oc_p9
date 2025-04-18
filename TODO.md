@@ -17,11 +17,12 @@
 - [ ] STEP 2 - Créer le plan prévisionnel de travail
     - [X] Examiner le docx avec le template (GOOGLE DRIVE: https://drive.google.com/open?id=1D7ylk9OEviOve21B7aq3M8GF5qQBgKBe&usp=drive_fs)
     - [X] Examiner si doc OPENCLASSROOMS a une ressource liée
-    - [ ] Regarder les ressources (news report, yt, etc.)
+    - [X] Regarder les ressources (news report, yt, etc.)
     - [ ] Créer le plan de travail prévisionnel - prototype (main papers from authors (2 mamba vision)& 1 paper introducing mamba)
     - [ ] Créer le plan de travail prévisionnel - production
     - Liste de ressources:
         - [X] Lire les ressources sur le groupe chrome ManbaVision
+        - [ ] Lire les séries d'articles Medium
 - [ ] STEP 3 - Remplir le notebook pour comparer les modèles
     - [ ] Identifier comment charger avec Pytorch ou Huggingface un dataset pour le train-val (demander à gpt ce qui est le mieux)
     - Liste de ressources:

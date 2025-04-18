@@ -3,6 +3,7 @@ name = "p9-backend"
 version = "0.1.0"
 requires-python = ">=3.11"
 dependencies = [
+    "mambavision>=1.1.0",
     "pillow>=11.1.0",
     "scikit-learn>=1.6.1",
     "torch>=2.6.0",

@@ -198,8 +198,6 @@ A cause du mécanisme de compression, la méthode HiPPO (High-Order Input Output
 La reconstruction permets de mieux tenir compte davatange des signaux récents que des plus anciens.<br>
 Cela permets de conserver l'information la plus ancienne de la séquence comme un contexte globale alors que les détails les plus récents de la séquence sont restitués avec un niveau de détail plus fin portant davantage d'attention sur les entrées récentes pour prédire le prochain token.<br>
 
-<img src="ressources/image-24.png" alt="SSM" height="300"/>
-![alt text](image.png)
 
 ##### d. **L'architecture S4: Strcutured State Space for Sequences**
 L'architecture S4 combine toutes les améliorations précédemment vues avec l'ajout de HiPPO.<br>
@@ -216,8 +214,49 @@ Cela permets de résoudre les problèmes suivants:
 - **Selective copying task** : Sélectionner les tokens pertinents dans la séquence d'entrée pour pouvoir effectuer l'inférence ce qui est actuellement impossible à cause de la nature "compressée" de l'état caché et la nature Lineaire et Invariante du SSM à cause notamment des matrices A et B (liés à l'input et le précedent état caché).
 - **Induction heads task** : Reproduire des schémas/patterns dans la séquence d'entrée dans la séquence de sortie (**à l'image des few shot prompts**)
 
-#### Sélection compressive de l'état caché
+#### Dimensions dynamiques : sélection compressive
 
+Mamba introduit ce mécanisme de sélection compressive en rendant les matrices B (lié à l'input) et C (lié à l'output) dynamiques et dépendantes de l'input.<br>
+La matrice A est liée aussi au step size et ce dernier devient aussi dynamique et dépendant de l'input.<br>
+Rendre les matrices dynamiques en fonction de l'input empêche d'utiliser la représentation convolutionnelle qui a un kernel fixe et invariant.<br>
+
+<img src="ressources/image-24.png" alt="S4" height="300"/>
+
+#### Parallelization scan
+
+<img src="ressources/image-25.png" alt="S4" height="300"/>
+
+#### Hardware-aware algorithm, kernel fusion and recomputation
+L'algorithme hardware-aware de MAMBA permets d'éviter les A/R successifs entre la SRAM et la DRAM en utilisant un algorithme de fusion de kernel et de recomputation.<br>
+Cela permet de réduire le temps d'accès à la mémoire et d'améliorer les performances globales du modèle.
+L'algorithme de fusion de kernel combine plusieurs opérations en une seule opération pour réduire le nombre d'accès à la mémoire et améliorer l'efficacité du modèle.<br>
+L'algorithme de recomputation permet de recalculer certaines opérations au lieu de les stocker en mémoire, ce qui réduit l'utilisation de la mémoire et améliore les performances du modèle.<br>
+
+<img src="ressources/image-26.png" alt="S4" height="200"/>
+<img src="ressources/image-27.png" alt="S4" height="200"/>
+
+#### S6 : MAMBA, a Selective State Space Model, alias S6
+Présentation de l'architecture Mamba alias Selective State Space Model aussi appellée S6
+
+<img src="ressources/image-28.png" alt="S6" height="300"/>
+
+#### **MambaBlock**
+
+<img src="ressources/image-29.png" alt="S6" height="300"/>
+
+#### **MambaBlock exemple for NLP**
+
+<img src="ressources/image-30.png" alt="S6" height="300"/>
+
+#### **Mixing Mamba with Transformers: Jamba for LLM**
+
+On tire les principaux avantages de MAMBA et des transformers pour créer un modèle hybride qui combine les avantages des deux architectures:
+- Highest quality Output
+- High throughput
+- Low Memory footprint
+
+<img src="ressources/image-31.png" alt="S6" height="300"/>
+<img src="ressources/image-32.png" alt="S6" height="300"/>
 
 
 ## 3. **Related News**
@@ -228,3 +267,43 @@ Synthèse:
 - Release de MambaVision research en 2024 par NVIDIA.
 - Release de plusiuers modèles pré-entraînés sur huggingface.
 - The promise of MambaVision for enterprise is that it could improve the efficiency and accuracy of vision operations, at potentially lower costs, thanks to lower computational requirements.
+- Mamba aims to provide comparable performance to transformers on many tasks while using fewer computational resources
+- Utilise à la fois l'approche convolutionnelle et les mécanismes d'attention des transformers pour traiter les données visuelles.
+
+Principaux avantages pour l'industrie:
+- Reduced inference costs: The improved throughput means lower GPU compute requirements for similar performance levels compared to Transformer-only models.-
+- Edge deployment potential: While still large, MambaVision’s architecture is more amenable to optimization for edge devices than pure Transformer approaches.
+- Improved downstream task performance: The gains on complex tasks like object detection and segmentation translate directly to better performance for real-world applications like inventory management, quality control, and autonomous systems.
+- Simplified deployment: NVIDIA has released MambaVision with Hugging Face integration, making implementation straightforward with just a few lines of code for both classification and feature extraction.
+
+Comments from Ali Hatamizadeh, NVIDIA Research Scientist:
+```Hi,
+Thanks for your interest in our work.
+
+Since the initial release, we've significantly enhanced MambaVision, scaling it up to an impressive 740 million parameters. We've also expanded our training approach by utilizing the larger ImageNet-21K dataset and have introduced native support for higher resolutions, now handling images at 256 and 512 pixels compared to the original 224 pixels.
+L/L2/L3 variants are indeed scaled up versions of their smaller counterparts T/T2 which were initially trained on ImageNet-1K.
+
+These advancements have substantially elevated the model's performance. MambaVision now delivers outstanding accuracy in both primary image classification tasks on ImageNet and downstream applications such as semantic segmentation (ADE20K) and object detection (COCO). Notably, our newest model variant, MambaVision-L3-512-21K, featuring 740M parameters, achieves a remarkable Top-1 accuracy of 88.1% solely through pre-training on ImageNet-21K.
+Notably, MambaVision represents the first successful scaling of a Mamba-based model to these large sizes, achieving state-of-the-art results.
+
+Kind Regards,
+Ali Hatamizadeh```
+
+
+### 3.2. Deeplearning.ai - Advantages and Disadvantages of Mamba
+URL: https://www.deeplearning.ai/the-batch/mamba-a-new-approach-that-may-outperform-transformers/
+
+- Yes, but: The authors tested model sizes much smaller than current state-of-the-art large language models. 
+- Why it matters: Google’s transformer-based Gemini 1.5 Pro offers context lengths up to 1 million tokens, but methods for building such models aren’t yet widely known. Mamba provides an alternative architecture that can accommodate very long input sequences while processing them more efficiently. Whether it delivers compelling benefits over large transformers and variations that provide higher efficiency and larger context is a question for further research
+- We're thinking: Research on Mamba is gaining momentum. Other teams are probing the architecture in projects like Motion Mamba, Vision Mamba, MoE-Mamba, MambaByte, and Jamba.
+
+
+### 3.3. Explaining VisionMamba
+URL: https://medium.com/ai-insights-cobet/vision-mamba-the-next-leap-in-visual-representation-learning-24a10e5a9cde
+
+- Yes, but: The authors tested model sizes much smaller than current state-of-the-art large language models. 
+- Why it matters: Google’s transformer-based Gemini 1.5 Pro offers context lengths up to 1 million tokens, but methods for building such models aren’t yet widely known. Mamba provides an alternative architecture that can accommodate very long input sequences while processing them more efficiently. Whether it delivers compelling benefits over large transformers and variations that provide higher efficiency and larger context is a question for further research
+- We're thinking: Research on Mamba is gaining momentum. Other teams are probing the architecture in projects like Motion Mamba, Vision Mamba, MoE-Mamba, MambaByte, and Jamba.
+
+### 3.4. Towards Data Science & Medium - Explaining VisionMamba
+URL: https://towardsdatascience.com/vision-mamba-like-a-vision-transformer-but-better-3b2660c35848/
