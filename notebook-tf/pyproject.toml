@@ -1,0 +1,14 @@
+[project]
+name = "notebook-tf"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "matplotlib>=3.10.1",
+    "tensorflow[and-cuda]==2.19",
+]
+
+[dependency-groups]
+notebook = [
+    "ipykernel>=6.29.5",
+    "ipywidgets>=8.1.6",
+]

@@ -1,0 +1,35 @@
+// This file is used to define the workspace settings for a Python project in Visual Studio Code.
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "python.envFile": "${workspaceFolder}/.env",
+    "python.analysis.autoSearchPaths": true,
+    "python.analysis.diagnosticMode": "workspace",
+    "python.analysis.extraPaths": [
+      "${workspaceFolder}/backend",
+      "${workspaceFolder}/frontend",
+      "${workspaceFolder}/notebook-tf",
+      "${workspaceFolder}/notebook-torch"
+    ],
+    "settings": {
+      "backend": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/backend/.venv/bin/python"
+      },
+      "frontend": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/frontend/.venv/bin/python"
+      },
+      "notebook-tf": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/notebook-tf/.venv/bin/python"
+      },
+      "notebook-torch": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/notebook-torch/.venv/bin/python"
+      }
+    }
+  }
+}
+
+
