@@ -22,5 +22,32 @@ mv Flipkart/flipkart_com-ecommerce_sample_1050.csv dataset.csv
 rm -rf Flipkart
 ```
 
-## Prétraitement
+## Environnement de travail
 
+Afin de parfaitement isoler les dépendances propres aux expérimentations, étant donné que le projet nécessite CUDA, il m'a été obligé de séparer complètement l'environnement de travail pour les expérimentations, le développement de l'application et le développement de l'interface utilisateur.
+
+Chacun des dossiers suivants contient un fichier `.python-version`, `pyproject.toml` et `uv.lock`:
+- `backend` : Environnement de développement de l'application
+- `frontend` : Environnement de développement de l'interface utilisateur
+- `notebook-tf` : Environnement de développement des expérimentations sous Tensorflow
+- `notebook-pytorch` : Environnement de développement des expérimentations sous Pytorch
+
+Pour pouvoir reproduire les conditions de travail, il est nécessaire d'avoir installé `uv` en suivant les instructions suivantes:
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Suite à l'installation de `uv`, il est nécessaire de redémarrer le terminal pour que la commande `uv` soit disponible.
+Ensuite, il suffit de se placer dans le dossier de l'environnement de travail souhaité et d'exécuter la commande suivante:
+```bash
+uv sync --all-groups
+```
+
+## Visualisation du résultat des expérimentations
+
+Le suivi des expérimentations a été effectué avec `tensorboard`. Pour pouvoir visualiser les résultats, il faut soit synchroniser l'un des deux environnements de travail `notebook-tf` ou `notebook-pytorch` et exécuter la commande suivante depuis le dossier racine du projet:
+```bash
+tensorboard --logdir=runs
+```
+
+Il reste possible d'installer uniquement `tensorboard` depuis votre environnement de travail habituel pour consulter directement les résultats des expérimentations.

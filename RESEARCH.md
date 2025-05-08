@@ -43,7 +43,7 @@ URL : https://research.nvidia.com/publication/2025-06_mambavision-hybrid-mamba-t
 ![architecture](ressources/ManbaVisionArchitecture.png)
 
 Synthèse:
-- MambaVision est un backbone hybride qui combine les avantages des Mamba et des transformateurs pour la vision par ordinateur.
+- MambaVision est un backbone hybride qui combine les avantages des Mamba et des transformeurs pour la vision par ordinateur.
 - Il est conçu pour être efficace en termes de calcul et de mémoire, tout en offrant des performances de pointe sur plusieurs tâches de vision.
 - Démonstration via une étude d'ablation des composants de l'architecture et prouver l'efficacité d'intégérer d'intégrer dans les blocks MAMBA des blocks de self-attention propres aux ViT améliore ce qui faisait défaut à MAMBA.
 - MambaVision sur ImageNet 1K SOTA top-1 accuracy (87.4% et 2.5x plus rapide que le ViT de base ????). ```TODO```
@@ -175,7 +175,7 @@ La taille du kernel limite l'attention locale et ne tient plus compte de toute l
 Il est donc nécessaire de **trouver un compromis entre l'approche séquentielle et l'approche par convolution pour obtenir un modèle efficace pour l'inférence et l'entraînement**.<br>
 
 #### Mixed Representation : Linear State-Space Layer (LSSL)
-Le LSSL est une approche qui combine les avantages des SSM et des convolutions pour utiliser le meilleur de l'approché récurrente et convolutionnelle:
+Le LSSL est une approche qui combine les avantages des RNNs et des DCNNs pour utiliser le meilleur de l'approché récurrente et convolutionnelle:
 - Convolutions pour l'entraînement : Le LSSL utilise des convolutions pour traiter les séquences d'entrée de manière efficace pendant l'entraînement, ce qui permet de capturer les dépendances locales et de paralléliser le processus d'entraînement.
 - Représentation d'état récurrente pour l'inférence : Pendant l'inférence, le LSSL utilise une représentation d'état récurrente pour traiter les séquences d'entrée, ce qui permet de capturer les dépendances à long terme et de réduire le coût de l'inférence.
 
@@ -277,7 +277,8 @@ Principaux avantages pour l'industrie:
 - Simplified deployment: NVIDIA has released MambaVision with Hugging Face integration, making implementation straightforward with just a few lines of code for both classification and feature extraction.
 
 Comments from Ali Hatamizadeh, NVIDIA Research Scientist:
-```Hi,
+```
+Hi,
 Thanks for your interest in our work.
 
 Since the initial release, we've significantly enhanced MambaVision, scaling it up to an impressive 740 million parameters. We've also expanded our training approach by utilizing the larger ImageNet-21K dataset and have introduced native support for higher resolutions, now handling images at 256 and 512 pixels compared to the original 224 pixels.
@@ -287,7 +288,8 @@ These advancements have substantially elevated the model's performance. MambaVis
 Notably, MambaVision represents the first successful scaling of a Mamba-based model to these large sizes, achieving state-of-the-art results.
 
 Kind Regards,
-Ali Hatamizadeh```
+Ali Hatamizadeh
+```
 
 
 ### 3.2. Deeplearning.ai - Advantages and Disadvantages of Mamba
@@ -298,12 +300,9 @@ URL: https://www.deeplearning.ai/the-batch/mamba-a-new-approach-that-may-outperf
 - We're thinking: Research on Mamba is gaining momentum. Other teams are probing the architecture in projects like Motion Mamba, Vision Mamba, MoE-Mamba, MambaByte, and Jamba.
 
 
-### 3.3. Explaining VisionMamba
-URL: https://medium.com/ai-insights-cobet/vision-mamba-the-next-leap-in-visual-representation-learning-24a10e5a9cde
+## WCAG
 
-- Yes, but: The authors tested model sizes much smaller than current state-of-the-art large language models. 
-- Why it matters: Google’s transformer-based Gemini 1.5 Pro offers context lengths up to 1 million tokens, but methods for building such models aren’t yet widely known. Mamba provides an alternative architecture that can accommodate very long input sequences while processing them more efficiently. Whether it delivers compelling benefits over large transformers and variations that provide higher efficiency and larger context is a question for further research
-- We're thinking: Research on Mamba is gaining momentum. Other teams are probing the architecture in projects like Motion Mamba, Vision Mamba, MoE-Mamba, MambaByte, and Jamba.
+<img src="ressources/image-33.png" alt="S6" height="400"/>
 
-### 3.4. Towards Data Science & Medium - Explaining VisionMamba
-URL: https://towardsdatascience.com/vision-mamba-like-a-vision-transformer-but-better-3b2660c35848/
+
+<img src="ressources/image-34.png" alt="S6" height="400"/>

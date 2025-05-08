@@ -14,50 +14,41 @@
         - [X] https://www.datacamp.com/community/blog
         - [X] https://www.deeplearning.ai/
     - [X] Choisir la baseline et le S.O.T.A. à évaluer pour le POC : Hybrid Mamba-Transformer NVIDIA MambaVision
-- [ ] STEP 2 - Créer le plan prévisionnel de travail
+- [X] STEP 2 - Créer le plan prévisionnel de travail
     - [X] Examiner le docx avec le template (GOOGLE DRIVE: https://drive.google.com/open?id=1D7ylk9OEviOve21B7aq3M8GF5qQBgKBe&usp=drive_fs)
     - [X] Examiner si doc OPENCLASSROOMS a une ressource liée
     - [X] Regarder les ressources (news report, yt, etc.)
     - [X] Créer le plan de travail prévisionnel - prototype 
-    - [ ] Sélection des 2 autres papiers à ajouter à la note (si nécessaire)
-    - [ ] Confirmer les modèles sélectionnés après test du Dataloader (EfficientNetB0, MobileNet, Vit/Deit, Mambavision)
-    - [ ] Finaliser le plan de travail prévisionnel - production
+    - [X] Sélection des 2 autres papiers à ajouter à la note (si nécessaire)
+    - [X] Confirmer les modèles sélectionnés après test du Dataloader (EfficientNetB0, MobileNet, Vit/Deit, Mambavision)
+    - [X] Finaliser le plan de travail prévisionnel - pré-production
     - Liste de ressources:
         - [X] Lire les ressources sur le groupe chrome ManbaVision
-        - [ ] Lire les séries d'articles Medium
-        - [ ] Lire les 3 papiers nvidia
-        - [ ] Check les vidéos youtube
-- [ ] STEP 3 - Remplir le notebook pour comparer les modèles
-    - [ ] Identifier comment charger avec Pytorch ou Huggingface un dataset pour le train-val (demander à gpt ce qui est le mieux)
-    - [ ] Reproduire une boucle d'entraînement sur tous les modèles à tester
-    - [ ] Evaluer le modèle efficient net directement sur le jeu de test
-    - Liste de ressources:
-        - [ ] timm GET STARTED & Tutorials : https://huggingface.co/docs/timm/index
-
+        - [X] Lire les séries d'articles Medium
+        - [X] Lire les 3 papiers nvidia
+        - [X] Check les vidéos youtube
+- [X] STEP 3 - Remplir le notebook pour comparer les modèles
+    - [X] Identifier comment charger avec Pytorch ou Huggingface un dataset pour le train-val (demander à gpt ce qui est le mieux)
+    - [X] Reproduire une boucle d'entraînement sur tous les modèles à tester
+    - [X] Evaluer le modèle efficient net directement sur le jeu de test
 - [ ] STEP 4 - Créer le dashboard
-    - [ ] Lire les spécificités du dashboard (GOOGLE DRIVE: https://drive.google.com/open?id=1D7ylk9OEviOve21B7aq3M8GF5qQBgKBe&usp=drive_fs)
-    - [ ] Choix de l'application en fonction du résultat attendu
-    - [ ] Sous-Steps à définir plus tard
+    - [X] Lire les spécificités du dashboard (GOOGLE DRIVE: https://drive.google.com/open?id=1D7ylk9OEviOve21B7aq3M8GF5qQBgKBe&usp=drive_fs)
+    - [X] Template à la main
+    - [ ] Créer le dashboard avec Gradio
+    - [ ] Demander à GPT que tous les critères d'accessibilité soient respectés sur le code gradio
     - Liste de ressources:
-        - [ ] [Cours OC concevez un contenu web accessible](https://openclassrooms.com/fr/courses/6691346-concevez-un-contenu-web-accessible/6940707-tirez-le-maximum-de-ce-cours-14)
-        - [ ] [W3C - WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/glance/fr)
-        - [ ] [Cours OC Tableau](https://openclassrooms.com/fr/courses/8200086-realisez-un-dashboard-avec-tableau?archived-source=4525361)
-        - [ ] [Cours OC Power BI](https://openclassrooms.com/fr/courses/6204541-realisez-des-rapports-danalyse-de-donnees-avec-power-bi?archived-source=4525361)
-        - [ ] [Doc Dash](https://dash.plotly.com/installation)
+        - [X] [Cours OC concevez un contenu web accessible](https://openclassrooms.com/fr/courses/6691346-concevez-un-contenu-web-accessible/6940707-tirez-le-maximum-de-ce-cours-14)
+        - [X] [W3C - WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/glance/fr)
 - [ ] STEP 5 - CI-CD
     - [ ] Container Docker + GHA FRONTEND
     - [ ] Container Docker + GHA BACKEND
-    - Liste de ressources:
-        - [ ] A définir
 - [ ] STEP 6 - Créer la note technique
     - [ ] Examiner le template de la note (GOOGLE DRIVE: https://drive.google.com/open?id=1D7ylk9OEviOve21B7aq3M8GF5qQBgKBe&usp=drive_fs)
-    - [ ] Sous-Steps à définir plus tard
-    - Liste de ressources:
-        - [ ] A définir
+    - [ ] Note technique à rédiger pré-production
 - [ ] STEP 7 - Préparer les livrables
-    - [ ] Plan de travail prévisionnel en PDF
-    - [ ] Notebook Jupyter avec le code et les résultats
-    - [ ] Note technique en PDF
+    - [ ] Plan de travail prévisionnel en PDF (1 page, production finale ?)
+    - [ ] Notebook Jupyter avec le code et les résultats (notebook commentés)
+    - [ ] Note technique en PDF (10 pages suivant le template)
     - [ ] Code source du dashboard
     - [ ] Présentation en PDF
         - [ ] 15 minutes powerpoint
