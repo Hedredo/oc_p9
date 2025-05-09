@@ -34,6 +34,8 @@
 - [ ] STEP 4 - Créer le dashboard
     - [X] Lire les spécificités du dashboard (GOOGLE DRIVE: https://drive.google.com/open?id=1D7ylk9OEviOve21B7aq3M8GF5qQBgKBe&usp=drive_fs)
     - [X] Template à la main
+    - [X] API prototype
+    - [ ] Ajouter la possibilité de renvoyer l'image redimensionnée à GRADIO
     - [ ] Créer le dashboard avec Gradio
     - [ ] Demander à GPT que tous les critères d'accessibilité soient respectés sur le code gradio
     - Liste de ressources:
@@ -41,7 +43,6 @@
         - [X] [W3C - WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/glance/fr)
 - [ ] STEP 5 - CI-CD
     - [ ] Container Docker + GHA FRONTEND
-    - [ ] Container Docker + GHA BACKEND
 - [ ] STEP 6 - Créer la note technique
     - [ ] Examiner le template de la note (GOOGLE DRIVE: https://drive.google.com/open?id=1D7ylk9OEviOve21B7aq3M8GF5qQBgKBe&usp=drive_fs)
     - [ ] Note technique à rédiger pré-production

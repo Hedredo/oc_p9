@@ -7,6 +7,7 @@ from torch import nn
 from timm.data.transforms_factory import create_transform
 from transformers import AutoModel
 from constants import INPUT_RESOLUTION
+from pydantic import BaseModel
 
 
 # Block MambaClassifier
@@ -97,5 +98,10 @@ class MambaClassifier(nn.Module):
         logits = self.classifier(out_avg_pool)
         return logits
 
+
+# BaseModel for prediction response
+class PredictionResponse(BaseModel):
+    received_label: str
+    predicted_label: str
 
 # End of code

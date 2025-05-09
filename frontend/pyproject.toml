@@ -1,5 +1,13 @@
 [project]
-name = "p9-front"
+name = "frontend"
 version = "0.1.0"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "gradio>=5.29.0",
+]
+
+[dependency-groups]
+notebook = [
+    "ipykernel>=6.29.5",
+    "ipywidgets>=8.1.7",
+]
