@@ -98,10 +98,17 @@ class MambaClassifier(nn.Module):
         logits = self.classifier(out_avg_pool)
         return logits
 
+# BaseModel for prediction request
+class PayloadRequest(BaseModel):
+    image: str
+
+# BaseModel for normalization
+class NormalizationResponse(BaseModel):
+    image_normalized: str
 
 # BaseModel for prediction response
 class PredictionResponse(BaseModel):
-    received_label: str
     predicted_label: str
+    probabilities: dict[str, float]
 
 # End of code

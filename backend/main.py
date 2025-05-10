@@ -35,25 +35,53 @@ Usage:
 2. Use the `/predict` endpoint to upload an image and receive a prediction.
 """
 
-import io
 import warnings
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+import base64
+from io import BytesIO
+from fastapi import FastAPI, Form, HTTPException
 import torch
-from classes import MambaClassifier, PredictionResponse
+from classes import (
+    MambaClassifier,
+    PayloadRequest,
+    NormalizationResponse,
+    PredictionResponse,
+)
 from transformers import AutoModel
 from constants import MAMBA_HIDDEN_SIZES, MODEL_CARD, MODEL_PATH
 from constants import N_CLASSES, LABEL2IDX, LABELS
 from PIL import Image
+from pathlib import Path
 
+# FastAPI application instance
 app = FastAPI(title="Image Prediction API")
 
-# Suppression des avertissements
+# Ignore FutureWarnings
 warnings.filterwarnings("ignore", category=FutureWarning)
-# Déclaration globale du device
+
+# Assign the device based on availability
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+# Function to decode base64 string to image
+def decode_base64_to_image(base64_str: str) -> Image.Image:
+    image_bytes = base64.b64decode(base64_str)
+    return Image.open(BytesIO(image_bytes))
 
-# Chargement du modèle au démarrage
+
+# Function to convert image to base64 string
+def img_to_base64(img):
+    buffer = BytesIO()
+    img.save(buffer, format="JPEG")
+    return base64.b64encode(buffer.getvalue()).decode("utf-8")
+
+# Transform the tensor to PIL image
+def tensor_to_pil(tensor):
+    tensor = tensor.squeeze(0)
+    tensor = tensor.permute(1, 2, 0)  # Change the order of dimensions
+    tensor = (tensor * 255).byte().numpy()  # Convert to uint8
+    return Image.fromarray(tensor)
+
+
+# Loading the model on startup
 @app.on_event("startup")
 async def load_model():
     """
@@ -87,19 +115,46 @@ async def load_model():
     )
     # Load the model weights
     app.state.model.load_state_dict(
-                    torch.load(MODEL_PATH),
-                )
+        torch.load(MODEL_PATH),
+    )
     # Set the model to evaluation mode and move it to the appropriate device
     app.state.model.eval()
     app.state.model.to(DEVICE)
 
-@app.post("/predict", response_model=PredictionResponse)
-async def predict(
-    image: UploadFile = File(..., description="Image au format JPEG ou PNG"),
-    label: str = Form(..., description="Label attendu pour l'image")
+
+@app.get("/")
+async def root():
+    """
+    Root endpoint for the API.
+
+    Returns:
+        dict: A simple message indicating that the API is running.
+    """
+    return {"message": "API en cours d'exécution"}
+
+@app.post("/normalize", response_model=NormalizationResponse)
+async def normalize(
+    payload: PayloadRequest,
 ):
     """
-    Asynchronously processes an uploaded image, performs inference using a pre-trained model, 
+    Asynchronously processes an uploaded image.
+    """
+    # Image preprocessing
+    img = decode_base64_to_image(payload.image)
+    image_normalized = app.state.transform(img).unsqueeze(0)
+
+    # Apply tensor to PIL Image to Base64
+    image_normalized = tensor_to_pil(image_normalized)
+    image_normalized = img_to_base64(image_normalized)
+
+    return NormalizationResponse(image_normalized=image_normalized)
+
+@app.post("/predict", response_model=PredictionResponse)
+async def predict(
+    payload: PayloadRequest,
+):
+    """
+    Asynchronously processes an uploaded image, performs inference using a pre-trained model,
     and returns the predicted label along with the received label.
     Args:
         image (UploadFile): The uploaded image file in JPEG or PNG format.
@@ -110,23 +165,17 @@ async def predict(
         HTTPException: If the uploaded image is invalid or cannot be processed.
     """
     # Lecture et conversion de l’image
-    contents = await image.read()
-    try:
-        img = Image.open(io.BytesIO(contents)).convert("RGB")
-    except Exception:
-        raise HTTPException(status_code=400, detail="Image non valide")
-
-    # Image preprocessing
-    img_processed = app.state.transform(img).unsqueeze(0).to(DEVICE)
+    img = decode_base64_to_image(payload.image)
+    image_normalized = app.state.transform(img).unsqueeze(0).to(DEVICE)
 
     # Perform inference
     with torch.no_grad():
-        outputs = app.state.model(img_processed)
+        outputs = app.state.model(image_normalized)
         _, predicted = torch.max(outputs, 1)
         pred_idx = predicted.item()
         predicted_label = LABELS[pred_idx]
+        probs_tensor = torch.nn.functional.softmax(outputs, dim=1)
+        probs_serialized = probs_tensor.squeeze(0).cpu().numpy().tolist()
+        probabilities = {label: round(probs_serialized[idx], 2) for label, idx in LABEL2IDX.items()}
 
-    return PredictionResponse(
-        received_label=label,
-        predicted_label=predicted_label
-    )
+    return PredictionResponse(predicted_label=predicted_label, probabilities=probabilities)
