@@ -32,13 +32,17 @@ Il est nécessaire de lancer le serveur API avant de lancer ngrok. Il est néces
 fastapi run main.py
 ```
 
+
+Pour obtenir une adresse publique aléatoire et temporaire qui redirige vers le serveur API local, il est nécessaire de lancer la commande suivante :
 ```bash
 ngrok http http://localhost:8000
 ```
 
-Ensuite ngrok renvoie une adresse publique qui redirige vers le serveur API local. Il est donc possible d'utiliser cette adresse pour accéder au serveur API depuis l'extérieur.
+Une adresse publique fixe a été créé avec ngrok pour le serveur API. Pour l'utiliser, il est nécessaire de lancer la commande suivante :
+```bash
+ngrok http --url=valid-flowing-mantis.ngrok-free.app 80
+```
 
-Ex. : https://a299-176-141-6-28.ngrok-free.app/docs
 
 # 2. SERVEO
 SERVEO ne nécessite pas de compte ni d'authentification. Il est donc possible de l'utiliser directement. Il est également nécessaire d'avoir installé ssh sur votre machine.
