@@ -31,21 +31,20 @@
     - [X] Identifier comment charger avec Pytorch ou Huggingface un dataset pour le train-val (demander à gpt ce qui est le mieux)
     - [X] Reproduire une boucle d'entraînement sur tous les modèles à tester
     - [X] Evaluer le modèle efficient net directement sur le jeu de test
-- [ ] STEP 4 - Créer le dashboard
+- [x] STEP 4 - Créer le dashboard
     - [X] Lire les spécificités du dashboard (GOOGLE DRIVE: https://drive.google.com/open?id=1D7ylk9OEviOve21B7aq3M8GF5qQBgKBe&usp=drive_fs)
     - [X] Template à la main
     - [X] API prototype
     - [X] Ajouter la possibilité de renvoyer l'image redimensionnée à GRADIO
     - [X] Créer le dashboard avec Gradio
     - [ ] Eléments à ajouter au front :
-        - [ ] Ajouter les probabilités de prédiction par classe
-        - [ ] Linéariser le contenu
+        - [X] Ajouter les probabilités de prédiction par classe
+        - [X] Linéariser le contenu
         - [ ] Check respect contenu WCAG 1.1.1 , 1.4.1, 1.4.3, 1.4.4, 2.4.2
         - [X] Ajouter un bouton pour télécharger la note technique
-        - [ ] Pour partie dashboard, ajouter des boutons filtrates tel que 'ignore outliers', 'x_max', 'x_min', 'y_max', 'y_min'
-        - [ ] Pour partie classification, ajouter les probabilités de prédiction par classe pour l'interprétabilité du modèle
-        - [ ] Pour la partie dashboard, ajouter les zones d'activation du modèle sur les différentes couches pour l'interprétabilité
-        - [ ] Réfléchir à ce qu'il faut proposer pour l'interprétabilité locale/globale
+        - [X] Pour partie classification, ajouter les probabilités de prédiction par classe pour l'interprétabilité du modèle
+        - [ ] Finaliser les explications, popups, etc.
+    - [ ] Créer le scrip à déployer, constantes, etc...
     - [ ] Demander à GPT que tous les critères d'accessibilité soient respectés sur le code gradio
     - Liste de ressources:
         - [X] [Cours OC concevez un contenu web accessible](https://openclassrooms.com/fr/courses/6691346-concevez-un-contenu-web-accessible/6940707-tirez-le-maximum-de-ce-cours-14)
@@ -55,6 +54,7 @@
 - [ ] STEP 6 - Créer la note technique
     - [ ] Examiner le template de la note (GOOGLE DRIVE: https://drive.google.com/open?id=1D7ylk9OEviOve21B7aq3M8GF5qQBgKBe&usp=drive_fs)
     - [ ] Note technique à rédiger pré-production
+    - [ ] Pour la partie dashboard, ajouter les zones d'activation du modèle sur les différentes couches pour l'interprétabilité
 - [ ] STEP 7 - Préparer les livrables
     - [ ] Plan de travail prévisionnel en PDF (1 page, production finale ?)
     - [ ] Notebook Jupyter avec le code et les résultats (notebook commentés)
