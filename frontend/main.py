@@ -9,7 +9,7 @@ from io import BytesIO
 import requests
 import json
 
-# plotly
+# importation de plotly pour le dashboard
 import plotly.express as px
 
 df_dashboard = pd.read_csv(CLOUD_FOLDER / "dataset_dashboard.csv")
