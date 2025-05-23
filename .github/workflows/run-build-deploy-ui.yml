@@ -3,7 +3,7 @@ name: Build & Push Docker Image after modifying the ui
 on:
     push:
       paths:
-        - 'front/**'  # Exécuter le workflow uniquement si le code du conteneur est modifié
+        - 'frontend/**'  # Exécuter le workflow uniquement si le code du conteneur est modifié
 
 env:
     DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
