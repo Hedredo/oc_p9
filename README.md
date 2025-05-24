@@ -1,5 +1,5 @@
-# oc_p9
-Dév. d'un P.O.C. pour mettre en valeur un travail de veille sur le S.O.T.A.
+# Description du projet (P9 OpenClassrooms)
+Développement d'un P.O.C. pour mettre en valeur un travail de veille sur le S.O.T.A. et de recherche sur les modèles de classificatio d'images en comparaison à une baseline d'un précédent projet sur un modèle fine-tuné `efficientnet-b0` sur le dataset `Flipkart`.
 
 
 ## Récupérer le jeu de données
@@ -45,9 +45,27 @@ uv sync --all-groups
 
 ## Visualisation du résultat des expérimentations
 
-Le suivi des expérimentations a été effectué avec `tensorboard`. Pour pouvoir visualiser les résultats, il faut soit synchroniser l'un des deux environnements de travail `notebook-tf` ou `notebook-pytorch` et exécuter la commande suivante depuis le dossier racine du projet:
+Le suivi des expérimentations a été effectué avec `tensorboard`. Les fichiers tensorboard sont dans le dossier `runs`. Pour pouvoir visualiser les résultats, il faut soit synchroniser l'un des deux environnements de travail `notebook-tf` ou `notebook-pytorch` et exécuter la commande suivante depuis le dossier racine du projet:
 ```bash
 tensorboard --logdir=runs
 ```
 
 Il reste possible d'installer uniquement `tensorboard` depuis votre environnement de travail habituel pour consulter directement les résultats des expérimentations.
+
+Un notebook `merged_notebook.ipynb` a été créé pour regrouper les résultats des deux expérimentations effectuées sous Tensorflow et Pytorch. Attention, ce dernier sert uniquement à visualiser les résultats. Pour tester les notebooks, il est nécessaire de se placer dans l'un des deux environnements de travail `notebook-tf` ou `notebook-pytorch` et d'intéragir avec après avoir synchronisé l'environnement de travail avec la commande suivante:
+```bash
+uv sync --all-groups
+```
+
+## Exécution de l'application backend
+Pour exécuter l'application, il est nécessaire de se placer dans le dossier `backend` et de suivre les instructions dans le README.
+
+## Exécution de l'interface utilisateur
+Pour exécuter l'interface utilisateur, il est nécessaire de se placer dans le dossier `frontend` et de suivre les instructions dans le README.
+
+L'interface utilisateur a été déployée sur un service WebApp d'Azure et un workflow de CI/CD a été mis en place pour automatiser le déploiement. Vous pouvez consulter le code du workflow dans le dossier `.github/workflows` et le fichier `run-build-deploy-ui.yml`.
+
+## Autres dossiers
+- `artifacts` : Dossier contenant les poids des modèles entraînés et les fichiers de configuration.
+- `data` : Dossier contenant le jeu de données et les fichiers de configuration.
+- `ressources` : Dossier contenant des éléments de recherche et sur le travail de veille accompli sur MambaVision. Le fichier `RESEARCH.md` contient un résumé des recherches effectuées et des liens vers les articles et ressources consultés.

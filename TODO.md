@@ -2,7 +2,7 @@
 ===========
 
 - [X] STEP 1 - Choisir le modèle
-    - [X] Lister les projets OC avec Modèle, Tâche, Dataset, Métrique (ex.: BERT, Classification, sentiment_dataset, accuracy 80%)
+    - [X] Lister les projets OC avec Modèle, Tâche, Dataset, Métrique (ex.: BERT, Classification, sentiment_dataset, accuracy)
     - [X] Recherche S.O.T.A. sur Papers with Code pour chaque projet
     - Parmi les favoris (MAMBAVISION), récupérer les ressources :
         - ~~[ ] Examiner la presse sur les liens OC (Groupe d'onglet CHROME)~~
@@ -37,23 +37,23 @@
     - [X] API prototype
     - [X] Ajouter la possibilité de renvoyer l'image redimensionnée à GRADIO
     - [X] Créer le dashboard avec Gradio
-    - [ ] Eléments à ajouter au front :
+    - [X] Eléments à ajouter au front :
         - [X] Ajouter les probabilités de prédiction par classe
         - [X] Linéariser le contenu
-        - [ ] Check respect contenu WCAG 1.1.1 , 1.4.1, 1.4.3, 1.4.4, 2.4.2
+        - [X] Check respect contenu WCAG 1.1.1 , 1.4.1, 1.4.3, 1.4.4, 2.4.2
         - [X] Ajouter un bouton pour télécharger la note technique
         - [X] Pour partie classification, ajouter les probabilités de prédiction par classe pour l'interprétabilité du modèle
-        - [ ] Finaliser les explications, popups, etc.
-    - [ ] Créer le scrip à déployer, constantes, etc...
-    - [ ] Demander à GPT que tous les critères d'accessibilité soient respectés sur le code gradio
+        - [X] Finaliser les explications, popups, etc.
+    - [X] Créer le scrip à déployer, constantes, etc...
+    - [X] Demander à GPT que tous les critères d'accessibilité soient respectés sur le code gradio
     - Liste de ressources:
         - [X] [Cours OC concevez un contenu web accessible](https://openclassrooms.com/fr/courses/6691346-concevez-un-contenu-web-accessible/6940707-tirez-le-maximum-de-ce-cours-14)
         - [X] [W3C - WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/glance/fr)
-- [ ] STEP 5 - CI-CD
-    - [ ] Container Docker + GHA FRONTEND
-- [ ] STEP 6 - Créer la note technique
-    - [ ] Examiner le template de la note (GOOGLE DRIVE: https://drive.google.com/open?id=1D7ylk9OEviOve21B7aq3M8GF5qQBgKBe&usp=drive_fs)
-    - [ ] Note technique à rédiger pré-production
+- [X] STEP 5 - CI-CD
+    - [X] Container Docker + GHA FRONTEND
+- [X] STEP 6 - Créer la note technique
+    - [X] Examiner le template de la note (GOOGLE DRIVE: https://drive.google.com/open?id=1D7ylk9OEviOve21B7aq3M8GF5qQBgKBe&usp=drive_fs)
+    - [X] Note technique à rédiger pré-production
     - [ ] Pour la partie dashboard, ajouter les zones d'activation du modèle sur les différentes couches pour l'interprétabilité
 - [ ] STEP 7 - Préparer les livrables
     - [ ] Plan de travail prévisionnel en PDF (1 page, production finale ?)
