@@ -38,7 +38,7 @@ Usage:
 import warnings
 import base64
 from io import BytesIO
-from fastapi import FastAPI, Form, HTTPException
+from fastapi import FastAPI
 import torch
 from classes import (
     MambaClassifier,
@@ -50,7 +50,6 @@ from transformers import AutoModel
 from constants import MAMBA_HIDDEN_SIZES, MODEL_CARD, MODEL_PATH
 from constants import N_CLASSES, LABEL2IDX, LABELS
 from PIL import Image
-from pathlib import Path
 
 # FastAPI application instance
 app = FastAPI(title="Image Prediction API")
@@ -63,18 +62,21 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Function to decode base64 string to image
 def decode_base64_to_image(base64_str: str) -> Image.Image:
+    """Decode a base64-encoded string to a PIL Image."""
     image_bytes = base64.b64decode(base64_str)
     return Image.open(BytesIO(image_bytes))
 
 
 # Function to convert image to base64 string
 def img_to_base64(img):
+    """Convert a PIL Image to a base64-encoded JPEG string."""
     buffer = BytesIO()
     img.save(buffer, format="JPEG")
     return base64.b64encode(buffer.getvalue()).decode("utf-8")
 
 # Transform the tensor to PIL image
 def tensor_to_pil(tensor):
+    """Convert a torch tensor to a PIL Image."""
     tensor = tensor.squeeze(0)
     tensor = tensor.permute(1, 2, 0)  # Change the order of dimensions
     tensor = (tensor * 255).byte().numpy()  # Convert to uint8

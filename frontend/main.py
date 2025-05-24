@@ -1,17 +1,23 @@
-import gradio as gr
-from constants import CLOUD_FOLDER, API_URL
-import pandas as pd
+"""
+Frontend application for image classification and dashboard visualization using Gradio.
+Provides UI for image selection, classification, transformation, and dataset exploration.
+"""
+
 import os
-from PIL import Image
 from pathlib import Path
 import base64
 from io import BytesIO
 import requests
 import json
 
-# importation de plotly pour le dashboard
+import gradio as gr
+from PIL import Image
+import pandas as pd
 import plotly.express as px
 
+from constants import CLOUD_FOLDER, API_URL
+
+# Load the dataset for the dashboard
 df_dashboard = pd.read_csv(CLOUD_FOLDER / "dataset_dashboard.csv")
 
 font_family = "Segoe UI, Arial, Verdana, Helvetica, sans-serif"
@@ -80,6 +86,7 @@ fig2.update_layout(
     ),
 )
 
+# Load the sampled dataset and create mappings for image paths and IDs
 df = pd.read_csv("sampled.csv")
 files = os.listdir(CLOUD_FOLDER / "images")
 filename2path = {filename: CLOUD_FOLDER / "images" / filename for filename in files}
@@ -88,6 +95,7 @@ id2filename = {
     for filename in files
 }
 
+# Define the function used in the Gradio interface
 def load_image(name: str) -> Path:
     """
     Load an image from the specified path.
@@ -98,18 +106,21 @@ def load_image(name: str) -> Path:
 
 # Function to decode base64 string to image
 def decode_base64_to_image(base64_str: str) -> Image.Image:
+    """Decode a base64-encoded string to a PIL Image."""
     image_bytes = base64.b64decode(base64_str)
     return Image.open(BytesIO(image_bytes))
 
 
 # Function to convert image to base64 string
-def img_to_base64(img):
+def img_to_base64(img: Image.Image) -> str:
+    """Convert a PIL Image to a base64-encoded JPEG string."""
     buffer = BytesIO()
     img.save(buffer, format="JPEG")
     return base64.b64encode(buffer.getvalue()).decode("utf-8")
 
 # Create a request with the img_b64 as a payload to the API
 def send_image_to_api(image_b64: str, endpoint: str, api_url: str = API_URL) -> str:
+    """Send a base64 image to the API and return the JSON response."""
     url = f"{api_url}/{endpoint}/"
     headers = {"Content-Type": "application/json"}
     payload = json.dumps({"image": image_b64})

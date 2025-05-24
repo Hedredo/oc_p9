@@ -54,3 +54,19 @@ ssh -R 80:localhost:8000 serveo.net
 Ensuite serveo renvoie une adresse publique qui redirige vers le serveur API local. Il est donc possible d'utiliser cette adresse pour accéder au serveur API depuis l'extérieur.
 
 Ex. : https://4aa9c87fca515c0ac5721662850b4a91.serveo.net/docs
+
+# Lancer le serveur API
+Pour lancer le serveur API, il est nécessaire d'exécuter la commande suivante :
+```bash
+fastapi run main.py
+```
+# Documentation de l'API
+La documentation de l'API est accessible à l'adresse suivante : 
+```
+http://localhost:8000/docs
+```
+# Accéder à l'API depuis l'extérieur
+Pour accéder à l'API depuis l'extérieur, il est nécessaire d'utiliser l'adresse publique fournie par ngrok ou serveo. Par exemple, si vous utilisez ngrok, l'adresse publique sera de la forme :
+```
+https://valid-flowing-mantis.ngrok-free.app/docs
+```

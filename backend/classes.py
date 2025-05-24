@@ -100,14 +100,17 @@ class MambaClassifier(nn.Module):
 
 # BaseModel for prediction request
 class PayloadRequest(BaseModel):
+    """Request payload containing a base64-encoded image string."""
     image: str
 
 # BaseModel for normalization
 class NormalizationResponse(BaseModel):
+    """Response containing the normalized image as a base64-encoded string."""
     image_normalized: str
 
 # BaseModel for prediction response
 class PredictionResponse(BaseModel):
+    """Response containing the predicted label and class probabilities."""
     predicted_label: str
     probabilities: dict[str, float]
 
