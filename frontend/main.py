@@ -6,10 +6,10 @@ Provides UI for image selection, classification, transformation, and dataset exp
 import os
 from pathlib import Path
 import base64
-from io import BytesIO
-import requests
 import json
+from io import BytesIO
 
+import requests
 import gradio as gr
 from PIL import Image
 import pandas as pd
@@ -20,7 +20,7 @@ from constants import CLOUD_FOLDER, API_URL
 # Load the dataset for the dashboard
 df_dashboard = pd.read_csv(CLOUD_FOLDER / "dataset_dashboard.csv")
 
-font_family = "Segoe UI, Arial, Verdana, Helvetica, sans-serif"
+FONT_FAMILY = "Segoe UI, Arial, Verdana, Helvetica, sans-serif"
 
 # Draw a scatter plot with height and width from df_dashboard as x and y axis
 fig = px.scatter(
@@ -36,7 +36,7 @@ fig.update_traces(marker=dict(size=12, line=dict(width=2, color="DarkSlateGrey")
 fig.update_layout(
     title=dict(
         text="Résolution des images",
-        font=dict(size=16, color="black", family=font_family, weight="bold"),
+        font=dict(size=16, color="black", family=FONT_FAMILY, weight="bold"),
         xanchor="center",
         x=0.4,
     ),
@@ -46,17 +46,21 @@ fig.update_layout(
     yaxis_title="Hauteur (pixels)",
     legend_title=dict(
         text="Catégories<br>(cliquez pour filtrer)",
-        font=dict(size=13, color="black", family=font_family, weight="bold"),
+        font=dict(size=13, color="black", family=FONT_FAMILY, weight="bold"),
     ),
     font=dict(
-        family=font_family,
+        family=FONT_FAMILY,
         size=12,
         color="black",
     ),
 )
 
 # draw a bar plot with the number of images per class (all bars same height, no image names)
-df_bar = df_dashboard.groupby("Catégorie", observed=False).size().reset_index(name="fréquence")
+df_bar = (
+    df_dashboard.groupby("Catégorie", observed=False)
+    .size()
+    .reset_index(name="fréquence")
+)
 fig2 = px.bar(
     df_bar,
     x="Catégorie",
@@ -67,7 +71,7 @@ fig2 = px.bar(
 fig2.update_layout(
     title=dict(
         text="Nombre d'images par catégorie",
-        font=dict(size=16, color="black", family=font_family, weight="bold"),
+        font=dict(size=16, color="black", family=FONT_FAMILY, weight="bold"),
         xanchor="center",
         x=0.4,
     ),
@@ -77,10 +81,10 @@ fig2.update_layout(
     yaxis_title="Nombre d'images",
     legend_title=dict(
         text="Catégories<br>(cliquez pour filtrer)",
-        font=dict(size=13, color="black", family=font_family, weight="bold"),
+        font=dict(size=13, color="black", family=FONT_FAMILY, weight="bold"),
     ),
     font=dict(
-        family=font_family,
+        family=FONT_FAMILY,
         size=12,
         color="black",
     ),
@@ -95,6 +99,7 @@ id2filename = {
     for filename in files
 }
 
+
 # Define the function used in the Gradio interface
 def load_image(name: str) -> Path:
     """
@@ -103,6 +108,7 @@ def load_image(name: str) -> Path:
     filename = id2filename.get(name)
     filepath = filename2path.get(filename)
     return Image.open(filepath)
+
 
 # Function to decode base64 string to image
 def decode_base64_to_image(base64_str: str) -> Image.Image:
@@ -118,14 +124,16 @@ def img_to_base64(img: Image.Image) -> str:
     img.save(buffer, format="JPEG")
     return base64.b64encode(buffer.getvalue()).decode("utf-8")
 
+
 # Create a request with the img_b64 as a payload to the API
 def send_image_to_api(image_b64: str, endpoint: str, api_url: str = API_URL) -> str:
     """Send a base64 image to the API and return the JSON response."""
     url = f"{api_url}/{endpoint}/"
     headers = {"Content-Type": "application/json"}
     payload = json.dumps({"image": image_b64})
-    response = requests.post(url, headers=headers, data=payload)
+    response = requests.post(url, headers=headers, data=payload, timeout=120)
     return response.json()
+
 
 def classify_image(image_name: str) -> str:
     """
@@ -139,8 +147,11 @@ def classify_image(image_name: str) -> str:
     # Extract the label from the response
     label = content.get("predicted_label", "Unknown")
     probs = content.get("probabilities", "Unknown")
-    df_probs: pd.DataFrame = pd.DataFrame({"Catégorie": probs.keys(), "Probabilité": probs.values()})
+    df_probs: pd.DataFrame = pd.DataFrame(
+        {"Catégorie": probs.keys(), "Probabilité": probs.values()}
+    )
     return label, df_probs
+
 
 def transform_image(image_name: str) -> str:
     """
@@ -157,9 +168,10 @@ def transform_image(image_name: str) -> str:
     return transformed_img
 
     # Gradio code pour l'interface utilisateur
+
+
 with gr.Blocks(
     css="#image_input {border: 2px solid #ccc;}",
-    # TODO : Eventuellement modifier le tooltip de l'image par sa description ?
     js="""
     () => {
         setTimeout(() => {
@@ -182,7 +194,7 @@ with gr.Blocks(
             });
         }, 500);
     }
-    """
+    """,
 ) as demo:
     # Application title. TODO : Ajouter la description de l'app
     gr.Markdown(
@@ -233,9 +245,9 @@ with gr.Blocks(
                 with gr.Row():
                     # Display the predicted probabilities for each class with a bar chart
                     df_output = gr.BarPlot(
-                    label="Scores par classe",
-                    y="Catégorie",
-                    x="Probabilité",
+                        label="Scores par classe",
+                        y="Catégorie",
+                        x="Probabilité",
                     )
 
             # Charger l'exemple sélectionné
@@ -244,7 +256,9 @@ with gr.Blocks(
         with gr.Row():
             # Bouton pour lancer la segmentation
             submit_btn = gr.Button("Classifier l'image")
-            submit_btn.click(classify_image, inputs=dropdown, outputs=[image_label, df_output])
+            submit_btn.click(
+                classify_image, inputs=dropdown, outputs=[image_label, df_output]
+            )
 
     #################
     # Dashboard tab #
@@ -253,7 +267,9 @@ with gr.Blocks(
         gr.Markdown(
             """
             <h2 style="text-align: left;">Dashboard de présentation du dataset Flipkart.</h2>
-            <p style="text-align: left;">Instructions ...</p>
+            <p style="text-align: left;">
+            Cette section présente des visualisations interactives du dataset Flipkart, permettant d'explorer la distribution des images et des catégories.
+            </p>
             """,
             elem_id="dashboard_title",  # ID pour le CSS
             elem_classes="dashboard-title",  # Classes CSS pour le style
@@ -262,7 +278,9 @@ with gr.Blocks(
             gr.Markdown(
                 """
                 <h3 style="text-align: left;">Résolution des images</h3>
-                <p style="text-align: left;">Instructions ...</p>
+                <p style="text-align: left;">
+                Ce graphique montre la répartition des résolutions (largeur et hauteur) des images du dataset, colorées par catégorie.
+                </p>
                 """,
                 elem_id="scatterplot_title",  # ID pour le CSS
                 elem_classes="scatterplot-title",  # Classes CSS pour le style
@@ -278,7 +296,9 @@ with gr.Blocks(
             gr.Markdown(
                 """
                 <h3 style="text-align: left;">Nombre d'images par catégorie</h3>
-                <p style="text-align: left;">Instructions ...</p>
+                <p style="text-align: left;">
+                Ce graphique à barres affiche le nombre d'images disponibles pour chaque catégorie dans le dataset.
+                </p>
                 """,
                 elem_id="barplot_title",  # ID pour le CSS
                 elem_classes="barplot-title",  # Classes CSS pour le style
@@ -295,7 +315,7 @@ with gr.Blocks(
             gr.Markdown(
                 """
                 <h3 style="text-align: left;">Image transformée</h3>
-                <p style="text-align: left;">Instructions ...</p>
+                <p style="text-align: left;">Reproduction des prétraitements effectués par le modèle MambaVision</p>
                 """,
                 elem_id="image_transformed_title",  # ID pour le CSS
                 elem_classes="image_transformed_title",  # Classes CSS pour le style
@@ -309,30 +329,37 @@ with gr.Blocks(
             )
         with gr.Row():
             image_input = gr.Image(
-                    value=list(filename2path.values())[0],
-                    type="filepath",
-                    label="Image à classifier",
-                    elem_id="image_input",  # ID pour le CSS
-                    elem_classes="image-input",  # Classes CSS pour le style
-                    height=300,
-                    width=300,
-                )
+                value=list(filename2path.values())[0],
+                type="filepath",
+                label="Image à classifier",
+                elem_id="image_input",  # ID pour le CSS
+                elem_classes="image-input",  # Classes CSS pour le style
+                height=300,
+                width=300,
+            )
             image_transformed = gr.Image(
-                    type="pil",
-                    label="Image transformée",
-                    elem_id="image_input",  # ID pour le CSS
-                    elem_classes="image-input",  # Classes CSS pour le style
-                    height=300,
-                    width=300,
-                )
+                type="pil",
+                label="Image transformée",
+                elem_id="image_input",  # ID pour le CSS
+                elem_classes="image-input",  # Classes CSS pour le style
+                height=300,
+                width=300,
+            )
             # Charger l'exemple sélectionné
             dropdown.change(fn=load_image, inputs=dropdown, outputs=image_input)
         # Button to launch the classification
         with gr.Row():
             # Bouton pour lancer la segmentation
             submit_btn = gr.Button("Transformer l'image")
-            submit_btn.click(transform_image, inputs=dropdown, outputs=[image_transformed])
+            submit_btn.click(
+                transform_image, inputs=dropdown, outputs=[image_transformed]
+            )
 
 
 if __name__ == "__main__":
-    demo.launch(share=False, allowed_paths=[CLOUD_FOLDER], server_name="0.0.0.0", server_port=7860)
+    demo.launch(
+        share=False,
+        allowed_paths=[CLOUD_FOLDER],
+        server_name="0.0.0.0",
+        server_port=7860,
+    )
