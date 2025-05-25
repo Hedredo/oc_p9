@@ -1,0 +1,60 @@
+La démarche méthodologique employée
+Présentez la méthodologie de modélisation, la métrique d'évaluation retenue et sa démarche d'optimisation, en 2 pages maximum.
+Le jeu de données utilisé contient des images et des descriptions textuelles de 1 050 biens de consommations issues de la plateforme indienne de e-commerce Flipkart.
+Train test split
+Métrique accuracy
+Fonction de perte : BinaryCrossEntropy
+Optimizer : AdamW
+FrameWork pytorch et CUDA pour les nouveaux alogorithmes
+
+Entre 25 et 30 epochs
+Learning rate 1e-5
+
+La méthodologie des expérimentations menées va comparer différents modèles de la famille MAMBAVISION ainsi que d'autres modèles de classification d'images dont :
+- `MobileNetV2` : D.C.N.N. conçu pour les appareils mobiles, optimisé pour la vitesse et l'efficacité.
+- `SwinTransformer` : Vision Transformer qui atteint des performances de pointe sur les tâches de classification d'images.
+- `MobileViTV2` : Vision Transformer optimisé pour les appareils mobiles, combinant les avantages des CNN et des Transformers.
+- `MambaVision T` : Modèle le plus léger de la famille MAMBAVISION.
+- `MambaVision S` : Modèle léger de la famille MAMBAVISION.
+- `MambaVision B` : Modèle de grande taille de la famille MAMBAVISION.
+- Les modèles les plus performants de la famille MAMBAVISION qui atteignent notamment des performances SOTA sur ImageNet-1K ne sont pas testés ici car le choix d'EfficientNet-B0 comme baseline est fait pour des raisons de performance et de rapidité d'entraînement.
+
+
+Chacun des modèles sera évalué en gelant / dégelant les poids des modèles pour tester leur performance en Transfer Learning et en Fine-Tuning.
+
+La tête de classification est adaptée aux nombres de classes du dataset, et les poids des modèles sont chargés depuis HuggingFace.
+Synthèse de la méthodologie du POC MambaVision
+1. Objectif et contexte
+Ce POC vise à comparer les performances de la famille de modèles MambaVision à d’autres architectures de classification d’images (EfficientNet-B0, MobileNetV2, Swin Transformer, MobileViTV2) sur un jeu de données métier. L’objectif est de valider la pertinence des modèles MambaVision pour remplacer une baseline existante (EfficientNet-B0) en termes de précision (accuracy) et de rapidité d’inférence (throughput).
+2. Préparation des données
+Chargement et nettoyage : Le dataset nettoyé est chargé depuis un fichier pickle, les colonnes non pertinentes sont supprimées, et les labels sont encodés avec LabelEncoder.
+Split des données : Les données sont séparées en trois ensembles (train, validation, test) de façon stratifiée pour garantir la représentativité des classes. Les splits sont sauvegardés pour réutilisation.
+Prévisualisation : Un aperçu des splits est réalisé pour vérifier la cohérence des transformations et la bonne répartition des classes.
+3. Pipelines TensorFlow et PyTorch
+a. TensorFlow (EfficientNet-B0)
+•	Environnement dédié : Utilisation d’un environnement isolé pour garantir la compatibilité des dépendances (TensorFlow 2.19, CUDNN 9.3).
+•	DataLoader custom : Création d’une classe ImageDataset héritant de tf.keras.utils.Sequence pour charger les images en batch, appliquer les transformations nécessaires et préparer les labels en one-hot.
+•	Chargement du modèle : EfficientNet-B0 est chargé avec des poids pré-entraînés, puis adapté au nombre de classes du dataset. Les poids du projet précédent sont réutilisés.
+•	Évaluation : Le modèle est évalué sur le jeu de test, les métriques (loss, accuracy) et la matrice de confusion sont loggées dans TensorBoard.
+b. PyTorch (MambaVision & autres modèles)
+•	Environnement dédié : Un environnement séparé est utilisé pour PyTorch (v2.6, CUDNN 9.1).
+•	DataLoader custom : Une classe ImageDataset héritant de torch.utils.data.Dataset permet de charger les images, appliquer les prétraitements spécifiques à chaque modèle (via HuggingFace ou TIMM), et préparer les labels.
+•	MambaClassifier : Une classe spécifique encapsule le backbone MambaVision, ajoute une tête de classification adaptée, et permet d’ajouter des couches fully-connected si besoin.
+•	TorchPipeline : Un pipeline unifié gère l’entraînement, la validation, le test, la gestion du gel/dégel du backbone, la génération des DataLoaders, et le logging dans TensorBoard.
+•	Expérimentations : Chaque modèle (MobileNetV2, Swin Transformer, MobileViTV2, MambaVision T/S/B) est testé en mode transfer learning (backbone gelé) et fine-tuning (backbone dégelé). Les hyperparamètres (nombre d’époques, learning rate) sont harmonisés pour la comparaison.
+4. Suivi des expériences et analyse des résultats
+•	Logging TensorBoard : Toutes les métriques (accuracy, loss, temps d’inférence, classification report, matrice de confusion) sont loggées dans TensorBoard pour chaque run.
+•	Comparaison des modèles : Un script extrait les métriques finales de chaque expérience pour générer un scatter plot (accuracy vs temps d’inférence) et comparer objectivement les modèles.
+•	Sélection du modèle : Le choix du modèle se base sur le compromis entre précision et rapidité, avec un focus sur les modèles MambaVision légers.
+5. Interprétabilité
+•	Importance globale (Permutation Feature Importance) : L’importance des canaux RGB est évaluée en permutant chaque canal et en mesurant l’impact sur l’accuracy.
+•	Importance locale (Integrated Gradients & Occlusion) : À l’aide de la librairie Captum, des heatmaps sont générées pour visualiser les zones de l’image qui influencent le plus la prédiction du modèle. Les méthodes utilisées sont :
+o	Integrated Gradients : attribution pixel par pixel.
+o	Occlusion Sensitivity : masquage de patches pour détecter les zones critiques.
+6. Points clés de la démarche
+•	Réplication des splits et des transformations pour garantir l’équité entre les frameworks et modèles.
+•	Automatisation des pipelines pour faciliter l’ajout de nouveaux modèles ou de nouveaux runs.
+•	Utilisation de TensorBoard pour centraliser l’analyse des résultats et faciliter la comparaison.
+•	Interprétabilité intégrée pour valider la robustesse et la compréhension des modèles retenus.
+________________________________________
+Cette méthodologie garantit la robustesse, la reproductibilité et l’objectivité de la comparaison entre architectures, tout en intégrant des outils d’analyse avancée pour la sélection du meilleur modèle dans un contexte industriel.
