@@ -54,13 +54,13 @@
 - [X] STEP 6 - Créer la note technique
     - [X] Examiner le template de la note (GOOGLE DRIVE: https://drive.google.com/open?id=1D7ylk9OEviOve21B7aq3M8GF5qQBgKBe&usp=drive_fs)
     - [X] Note technique à rédiger pré-production
-    - [ ] Pour la partie dashboard, ajouter les zones d'activation du modèle sur les différentes couches pour l'interprétabilité
-- [ ] STEP 7 - Préparer les livrables
-    - [ ] Plan de travail prévisionnel en PDF (1 page, production finale ?)
-    - [ ] Notebook Jupyter avec le code et les résultats (notebook commentés)
-    - [ ] Note technique en PDF (10 pages suivant le template)
-    - [ ] Code source du dashboard
-    - [ ] Présentation en PDF pour un public non technique
-        - [ ] 15 minutes powerpoint
-        - [ ] 5 minutes démo frontend
-    - [ ] Tester la démo cloud du dashboard
+    - [X] Pour la partie dashboard, ajouter les zones d'activation du modèle sur les différentes couches pour l'interprétabilité
+- [X] STEP 7 - Préparer les livrables
+    - [X] Plan de travail prévisionnel en PDF (1 page, production finale ?)
+    - [X] Notebook Jupyter avec le code et les résultats (notebook commentés)
+    - [X] Note technique en PDF (10 pages suivant le template)
+    - [X] Code source du dashboard
+    - [X] Présentation en PDF pour un public non technique
+        - [X] 15 minutes powerpoint
+        - [X] 5 minutes démo frontend
+    - [X] Tester la démo cloud du dashboard

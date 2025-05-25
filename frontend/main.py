@@ -196,10 +196,10 @@ with gr.Blocks(
     }
     """,
 ) as demo:
-    # Application title. TODO : Ajouter la description de l'app
+    # Application title.
     gr.Markdown(
         """
-        <h1 style="text-align: center; color: #4CAF50;">Mon App</h1>
+        <h1 style="text-align: center; color: #4CAF50;">MambaVision classifier & Flipkart Dashboard</h1>
         """,
         elem_id="title",  # ID pour le CSS
         elem_classes="title",  # Classes CSS pour le style
@@ -211,7 +211,7 @@ with gr.Blocks(
         gr.Markdown(
             """
             <h2 style="text-align: left;">Interface applicative pour utiliser le modèle de classification d'image.</h2>
-            <p style="text-align: left;">Instructions ...</p>
+            <p style="text-align: left;">Sélectionnez une image et le modèle va prédire la catégorie la plus probable.</p>
             """,
             elem_id="classifier_title",  # ID pour le CSS
             elem_classes="classifier-title",  # Classes CSS pour le style
